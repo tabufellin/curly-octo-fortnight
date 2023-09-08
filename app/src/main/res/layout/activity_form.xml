@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextReminderName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Reminder Name" />
+
+    <TextView
+        android:id="@+id/textViewFrequency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextReminderName"
+        android:text="Frequency (times per day)" />
+
+    <NumberPicker
+        android:id="@+id/numberPickerFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewFrequency"
+        android:layout_centerHorizontal="true"
+        android:minValue="1"
+        android:maxValue="10" />
+
+    <TextView
+        android:id="@+id/textViewStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/numberPickerFrequency"
+        android:text="Start Time" />
+
+    <TimePicker
+        android:id="@+id/timePickerStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewStartTime"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/buttonCreateReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timePickerStartTime"
+        android:layout_centerHorizontal="true"
+        android:text="Create Reminder" />
+
+</RelativeLayout>
