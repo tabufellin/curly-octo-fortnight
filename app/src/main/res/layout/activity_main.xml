@@ -8,11 +8,31 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
     <EditText
         android:id="@+id/editText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter a reminder" />
+        android:hint="Enter a reminder " />
+
+    <EditText
+        android:id="@+id/editTimesPerDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="How many times per day?"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/addButton"
@@ -20,9 +40,5 @@
         android:layout_height="wrap_content"
         android:text="Add" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+
 </LinearLayout>

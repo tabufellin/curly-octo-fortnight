@@ -12,10 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.ListView
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
 
-    private val reminders = ArrayList<String>()
+    private val reminders = ArrayList<Reminder>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +25,28 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
         val listView = findViewById<ListView>(R.id.listView)
         val editText = findViewById<EditText>(R.id.editText)
+        val editTimesPerDay = findViewById<EditText>(R.id.editTimesPerDay)
+        //val e = findViewById<EditText>(R.id.editTimesPerDay)
+        //val editTimesPerDayNumber = findViewById<EditText>(R.id.editTimesPerDay)
         val addButton = findViewById<Button>(R.id.addButton)
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, reminders)
+        val adapter = ReminderAdapter(this, reminders)
         listView.adapter = adapter
 
         addButton.setOnClickListener {
+            val id : Long = Random.nextLong()
             val reminderText = editText.text.toString()
-            if (reminderText.isNotEmpty()) {
-                reminders.add(reminderText)
+            val reminderTimesPerDay = Integer.parseInt(editTimesPerDay.text.toString())
+
+            val howManyTimesPerDay : Int = 5
+            val active : Boolean = true
+            val temporalNewReminderObject : Reminder = Reminder(id, reminderText, reminderTimesPerDay, active)
+            if (reminderText.isNotEmpty() && reminderTimesPerDay > 0 ) {
+
+                adapter.addReminder(temporalNewReminderObject)
                 adapter.notifyDataSetChanged()
                 editText.text.clear()
+                editTimesPerDay.text.clear()
             }
         }
 
