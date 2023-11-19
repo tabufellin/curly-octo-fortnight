@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.activity.ComponentActivity
 import android.widget.GridLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,34 +22,29 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setContentView(R.layout.activity_main)
         val listView = findViewById<ListView>(R.id.listView)
         val editText = findViewById<EditText>(R.id.editText)
         val editTimesPerDay = findViewById<EditText>(R.id.editTimesPerDay)
-        //val e = findViewById<EditText>(R.id.editTimesPerDay)
-        //val editTimesPerDayNumber = findViewById<EditText>(R.id.editTimesPerDay)
         val addButton = findViewById<Button>(R.id.addButton)
 
         val adapter = ReminderAdapter(this, reminders)
         listView.adapter = adapter
 
         addButton.setOnClickListener {
-            val id : Long = Random.nextLong()
-            val reminderText = editText.text.toString()
-            val reminderTimesPerDay = Integer.parseInt(editTimesPerDay.text.toString())
-
-            val howManyTimesPerDay : Int = 5
-            val active : Boolean = true
-            val temporalNewReminderObject : Reminder = Reminder(id, reminderText, reminderTimesPerDay, active)
-            if (reminderText.isNotEmpty() && reminderTimesPerDay > 0 ) {
-
-                adapter.addReminder(temporalNewReminderObject)
-                adapter.notifyDataSetChanged()
-                editText.text.clear()
-                editTimesPerDay.text.clear()
-            }
+            showHabitSuggestions(editText) // Modificado para llamar a showHabitSuggestions
         }
+    }
 
+    private fun showHabitSuggestions(editText: EditText) {
+        val habitSuggestions = arrayOf("Caminar 30 minutos", "Beber 2 litros de agua", "Leer 20 páginas")
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Sugerencias de Hábitos")
+        builder.setItems(habitSuggestions) { _, which ->
+            val selectedHabit = habitSuggestions[which]
+            editText.setText(selectedHabit)
+            // Puedes poner aquí más lógica si quieres pre-rellenar más campos
+        }
+        builder.show()
     }
 }
